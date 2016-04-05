@@ -23,16 +23,29 @@ public class Detector : MonoBehaviour {
 				Manager.allies1S.Add(col);
 				
 				}
+
+				GetComponent<LineRenderer>().enabled = true;
+				GetComponent<LineRenderer>().material.color = Manager.Player1S;
+				GetComponent<LineRenderer>().SetWidth(0.1f , 0.1f);
+				GetComponent<LineRenderer>().SetPosition(0, transform.position);
+				GetComponent<LineRenderer>().SetPosition(1, col.transform.position);
+
 			
-			}
+			}else{}
 			if(this.tag == "Player2"){
 			if(!Manager.allies2S.Contains(col)){
 				
 				Manager.allies2S.Add(col);
 				
 				}
+
+				GetComponent<LineRenderer>().enabled = true;
+				GetComponent<LineRenderer>().material.color = Manager.Player2S;
+				GetComponent<LineRenderer>().SetWidth(0.1f , 0.1f);
+				GetComponent<LineRenderer>().SetPosition(0, transform.position);
+				GetComponent<LineRenderer>().SetPosition(1, col.transform.position);
 			
-			}
+			}else{}
 		}
 		
 	}
@@ -42,6 +55,7 @@ public class Detector : MonoBehaviour {
 		if(Manager.allies1S.Contains(col)){
 		
 		Manager.allies1S.Remove(col);
+			GetComponent<LineRenderer>().enabled = false;
 				
 		}
 		
