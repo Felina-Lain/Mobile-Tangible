@@ -1,0 +1,44 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class CreateTagsLayers : MonoBehaviour {
+
+	// Open tag manager
+	SerializedObject tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+	SerializedProperty tagsProp = tagManager.FindProperty("tags");
+
+	// For Unity 5 we need this too
+	SerializedProperty layersProp = tagManager.FindProperty("layers");
+
+	// Adding a Tag
+	string s = "the_tag_i_want_to_add";
+
+	// First check if it is not already present
+	bool found = false;
+	for (int i = 0; i < tagsProp.arraySize; i++)
+	{
+		SerializedProperty t = tagsProp.GetArrayElementAtIndex(i);
+		if (t.stringValue.Equals(s)) { found = true; break; }
+	}
+
+	// if not found, add it
+	if (!found)
+	{
+		tagsProp.InsertArrayElementAtIndex(0);
+		SerializedProperty n = tagsProp.GetArrayElementAtIndex(0);
+		n.stringValue = s;
+	}
+
+	// Setting a Layer (Let's set Layer 10)
+	string layerName = "the_name_want_to_give_it";
+
+	// --- Unity 4 ---
+	SerializedProperty sp = tagManager.FindProperty("User Layer 10");
+	if (sp != null) sp.stringValue = layerName;
+
+	// --- Unity 5 ---
+	SerializedProperty sp = layersProp.GetArrayElementAtIndex(10);
+	if (sp != null) sp.stringValue = layerName;
+	// and to save the changes
+	tagManager.ApplyModifiedProperties();
+}

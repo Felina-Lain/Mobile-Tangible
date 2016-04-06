@@ -6,46 +6,36 @@ using System.Collections.Generic;
 
 public class Detector : MonoBehaviour {
 
-	public List<Collider> allies1 = new List<Collider>();
-	public List<Collider> allies2 = new List<Collider>();
-
-
-
-	void OnTriggerStay(Collider col){
-
-		ListAdding (col, "Player1", allies1, Manager.colorListS[0]);
-		ListAdding (col, "Player2", allies2, Manager.colorListS[1]);
-
-			                                         
-	}
-
+	public List<Collider> _allies = new List<Collider>();
 
 	void Update () {
 
-		for (int i = 0; i < allies1.Count; i++) {
 
-			if (allies1 [i] == null) {
-				allies1.RemoveAt (i);
-			}
+	for(int i = 0; i < _allies.Count; i++) {
 
-
-		}
-
-		for (int j = 0; j < allies2.Count; j++) {
-
-			if (allies2 [j] == null) {
-				allies2.RemoveAt (j);
+			if (_allies[i] == null) {
+				_allies.RemoveAt (i);
 			}
 
 		}
-
 	}
+
+	void OnTriggerEnter(Collider col){
+
+		for (int i = 0; i < Manager.PlayersS.Count; i++) {
+			ListAdding (col, _allies, Manager.colorListS[i]);
+			print("color" + Manager.colorListS[i]);
+		}
+	
+	}
+
+
 
 	public void LineTracing (Color aColor, int aCount, int aIndex, Collider aCol){
 
 
 		GetComponent<LineRenderer>().material.color = aColor;
-		GetComponent<LineRenderer>().SetWidth(0.1f , 0.1f);
+		GetComponent<LineRenderer>().SetWidth(0.05f , 0.05f);
 		GetComponent<LineRenderer>().SetPosition(0, this.transform.position);
 		GetComponent<LineRenderer>().SetVertexCount(aCount);
 		GetComponent<LineRenderer>().SetPosition(aIndex, aCol.transform.position);
@@ -53,7 +43,7 @@ public class Detector : MonoBehaviour {
 
 	}
 
-	public void ListAdding (Collider _col, string _tag, List<Collider> _list, Color _color)
+	public void ListAdding (Collider _col, List<Collider> _list, Color _color)
 	{
 		if (!_list.Contains (this.GetComponent<Collider> ())) {
 
@@ -61,7 +51,7 @@ public class Detector : MonoBehaviour {
 		
 		}
 	
-		if (_col.tag == this.tag && this.tag == _tag) {
+		if (_col.name == this.transform.parent.name ) {
 			if (!_list.Contains (_col)) {
 
 
@@ -80,4 +70,5 @@ public class Detector : MonoBehaviour {
 	
 
 	}
+
 }
