@@ -5,30 +5,27 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
+
+
 	void Start(){
-		
-		if (this.tag == "Player1") {
-			this.GetComponent<Renderer> ().material.color = Manager.Player1S;
+
+		for (int i = 0; i < Manager.PlayersS.Count; i++) {
+			if (Manager.turnsS == Manager.PlayersS[i]) {
+				SetupPlayers ("Player 1", "Player1", i);
+			}
 		}
-		if (this.tag == "Player2") {
-			this.GetComponent<Renderer> ().material.color = Manager.Player2S;
-		}
-		
 	}
 
 
-	
-	// Update is called once per frame
-	void Update () {
-				
-		if (this.tag == "Player1") {
-			this.GetComponent<Renderer> ().material.color = Manager.Player1S;
-		}
-		if (this.tag == "Player2") {
-			this.GetComponent<Renderer> ().material.color = Manager.Player2S;
-		}
-		
-		
+
+	public void SetupPlayers (string _name, string _tag, int _i){
+
+		this.gameObject.layer = _i + 10;
+		this.gameObject.tag = _tag;
+		//this.GetComponentInChildren<GameObject>().tag = _tag;
+		this.GetComponent<Renderer> ().material.color = Manager.colorListS[_i];
+
+
 	}
 		
 }

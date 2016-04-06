@@ -5,22 +5,22 @@ using System.Collections.Generic;
 
 public class Manager : MonoBehaviour {
 
-	public static Color Player1S;
-	public static Color Player2S;
+	public static List<string> PlayersS = new List<string>();
+	public List<string> Players = new List<string>();
 
-	public static float detectRadiusS;
+	public static List<Color> colorListS = new List<Color>();
+	public List<Color> colorList = new List<Color>();
 
-	public Color Player1;
-	public Color Player2;
-	
-	public static List<Collider> allies1S = new List<Collider>();
-	public static List<Collider> allies2S = new List<Collider>();
+	public static string turnsS;
+	public string turns;
 
-	
 	void Update(){
 		
-		Player1S = Player1;
-		Player2S = Player2;		
+		PlayersS = Players;
+
+		colorListS = colorList;
+
+		turnsS = turns;
 		
 	}
 	
