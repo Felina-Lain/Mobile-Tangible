@@ -88,7 +88,7 @@ public class Detector : MonoBehaviour {
 
 
 		}
-	
+
 
 	}
 

@@ -20,6 +20,8 @@ public class Manager : MonoBehaviour {
 	public GameObject playerFab;
 	public GameObject specialFab;
 
+	public List<List<Collider>> Listallies = new List<List<Collider>>();
+
 	void Start (){
 
 		Spawn.prefabS = playerFab;
