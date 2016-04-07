@@ -23,8 +23,8 @@ public class Detector : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 
 		for (int i = 0; i < Manager.PlayersS.Count; i++) {
-			ListAdding (col, _allies, Manager.colorListS[i]);
-			print("color" + Manager.colorListS[i]);
+			ListAdding (col, _allies);
+
 		}
 	
 	}
@@ -43,7 +43,7 @@ public class Detector : MonoBehaviour {
 
 	}
 
-	public void ListAdding (Collider _col, List<Collider> _list, Color _color)
+	public void ListAdding (Collider _col, List<Collider> _list)
 	{
 		if (!_list.Contains (this.GetComponent<Collider> ())) {
 
@@ -51,7 +51,7 @@ public class Detector : MonoBehaviour {
 		
 		}
 	
-		if (_col.name == this.transform.parent.name ) {
+		if (_col.name == this.transform.parent.name  || _col.name == "Special" ) {
 			if (!_list.Contains (_col)) {
 
 
@@ -60,13 +60,34 @@ public class Detector : MonoBehaviour {
 				}
 
 				for (int i = 0; i < _list.Count; i++) {
+					
+				Color _color = this.transform.parent.GetComponent<Renderer> ().material.GetColor("_TintColor");
 
 				LineTracing (_color, _list.Count, i, _list [i].GetComponent<Collider> ());
 							
 				}
 
 
-			} else {}
+		}
+
+		if (this.name == "Special" ) {
+			if (!_list.Contains (_col)) {
+
+
+				_list.Add (_col);
+
+			}
+
+			for (int i = 0; i < _list.Count; i++) {
+
+				Color _color = this.transform.parent.GetComponent<Renderer> ().material.GetColor("_TintColor");
+
+				LineTracing (_color, _list.Count, i, _list [i].GetComponent<Collider> ());
+
+			}
+
+
+		}
 	
 
 	}

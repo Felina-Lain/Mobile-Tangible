@@ -21,9 +21,11 @@ public class Player : MonoBehaviour {
 	public void SetupPlayers (int _i){
 
 		this.gameObject.layer = _i + 10;
-		this.GetComponent<Renderer> ().material.color = Manager.colorListS[_i];
+		this.GetComponent<Renderer> ().material.SetColor ("_TintColor", Manager.colorListS[_i]);
+		//color = Manager.colorListS[_i]; 
 
 
 	}
+
 		
 }
