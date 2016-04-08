@@ -85,7 +85,7 @@ public class Detector : MonoBehaviour {
 				LineTracing (_color, _list.Count, i, _list [i].GetComponent<Collider> ());
 
 			}
-
+				
 
 		}
 

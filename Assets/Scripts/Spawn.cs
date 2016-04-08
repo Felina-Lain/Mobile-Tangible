@@ -19,18 +19,14 @@ public class Spawn : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Update () {
+	void OnMouseOver () {
 		if (Input.GetMouseButtonDown (0)) {
-			Ray r = Camera.main.ScreenPointToRay (Input.mousePosition);
-			Collider c = GetComponentInChildren<Collider> ();
-			RaycastHit hitInfo;
-			if (!c.Raycast (r, out hitInfo, Mathf.Infinity)) {		
-
-				if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject ()) {
+				
 					Vector3 screenPos = Input.mousePosition;
 					Vector3 worldPos = mainCam.GetComponent<Camera> ().ScreenToWorldPoint (screenPos);
 
-					_inst = Instantiate (prefabS, new Vector3 (worldPos.x, worldPos.y, worldPos.z + 100), Quaternion.identity) as GameObject;
+					_inst = Instantiate (prefabS, new Vector3 (worldPos.x, worldPos.y, worldPos.z + 95), Quaternion.identity) as GameObject;
+				
 					_inst.transform.name = Manager.turnsS;
 
 					if (prefabS == Manager.specialFabS) {
@@ -43,12 +39,9 @@ public class Spawn : MonoBehaviour {
 								Special.canSpecialS [i] = false;
 								Special._On = false;
 								Spawn.prefabS = Manager.playerFabS;
-
-							}
-						}
-				
+								NextTurn.turnNum += 1;
 					}
-				}
+				}				
 			}
 		}
 	}

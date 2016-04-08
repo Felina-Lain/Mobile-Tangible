@@ -11,41 +11,27 @@ public class NextTurn : MonoBehaviour {
 
 	public int _turnNum;
 
+	public int tmp;
+
 	void Start (){
 
-		turnNum = 1;
-		Manager.turnsS = "Player" + turnNum as string;
-		buttonTurn.text = "Player" + turnNum as string;
+		turnNum = 0;
 
 	}
 
 	void Update(){
 
 		_turnNum = turnNum;
+		tmp = turnNum + 1;
+		buttonTurn.text = "Player" + tmp as string;
+		Manager.turnsS = "Player" + tmp as string;
 
-	}
+		if (turnNum == Manager.PlayersS.Count) {
+			
+			turnNum = 0;
 
-	// Update is called once per frame
-	public void ChangeTurn () {
 
-		turnNum += 1;
-
-		Manager.turnsS = "Player" + turnNum as string;
-	
-		if (turnNum > Manager.PlayersS.Count) {
-		
-			ResertTurns ();
-		
 		}
-
-		buttonTurn.text = "Player" + turnNum as string;
 	}
-
-	public void ResertTurns () {
-	
-		turnNum = 1;
-		Manager.turnsS = "Player" + turnNum as string;
-		buttonTurn.text = "Player" + turnNum as string;
-	
-	}
+		
 }
